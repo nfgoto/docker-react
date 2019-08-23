@@ -15,3 +15,18 @@ before_install:
 script:
   # CI=true not to run Jest in watch mode (non-interactive)
   - docker run --env CI=true fgoto/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticveanst 
+  region: "us-east-2"
+  name: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-335923808572"
+  bucket_path: "docker-react"
+  
+  # deploy only when code pushed on branch master
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
