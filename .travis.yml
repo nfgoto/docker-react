@@ -1,0 +1,17 @@
+# get root permission
+sudo: required
+services:
+  # travis will auto install a docker inside the running container
+  - docker
+
+# commands to execute before running tests / deploy
+before_install:
+  # tag your image
+  - docker build -t fgoto/docker-react -f Dockerfile.dev .
+
+# commands that need to be executed to run test suite
+# travis watches output and if exit status 1= 0 === FAIL
+# so you need commands that exit at some point
+script:
+  # -- --coverage to not wait for user input and exit
+  - docker run fgoto/docker-react npm run test -- --coverage
