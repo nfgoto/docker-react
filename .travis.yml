@@ -13,6 +13,5 @@ before_install:
 # travis watches output and if exit status 1= 0 === FAIL
 # so you need commands that exit at some point
 script:
-  # not to run Jest in watch mode (non-interactive)
-  # -- --coverage to not wait for user input and exit
-  - CI=true docker run fgoto/docker-react npm run test -- --coverage
+  # CI=true not to run Jest in watch mode (non-interactive)
+  - docker run fgoto/docker-react --env CI=true npm run test -- --coverage --no-watch
