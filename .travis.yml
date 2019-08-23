@@ -1,19 +1,12 @@
 # get root permission
 sudo: required
 services:
-  # travis will auto install a docker inside the running container
   - docker
 
-# commands to execute before running tests / deploy
 before_install:
-  # tag your image
   - docker build -t fgoto/docker-react -f Dockerfile.dev .
 
-# commands that need to be executed to run test suite
-# travis watches output and if exit status 1= 0 === FAIL
-# so you need commands that exit at some point
 script:
-  # CI=true not to run Jest in watch mode (non-interactive)
   - docker run --env CI=true fgoto/docker-react npm run test -- --coverage
 
 deploy:
@@ -24,7 +17,6 @@ deploy:
   bucket_name: "elasticbeanstalk-us-east-2-335923808572"
   bucket_path: "docker-react"
   
-  # deploy only when code pushed on branch master
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY

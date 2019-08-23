@@ -1,9 +1,9 @@
 # can tag as a phase with "as"
 FROM node:alpine as builder
 WORKDIR /app
-COPY ./package.json .
+COPY ./package*.json ./
 RUN npm install
-COPY . .
+COPY ./ ./
 RUN npm run build
 
 # second phase
