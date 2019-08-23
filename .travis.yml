@@ -14,4 +14,4 @@ before_install:
 # so you need commands that exit at some point
 script:
   # CI=true not to run Jest in watch mode (non-interactive)
-  - docker run fgoto/docker-react --env CI=true npm run test -- --coverage --no-watch
+  - docker run --env CI=true fgoto/docker-react npm run test -- --coverage --no-watch
